@@ -3,16 +3,18 @@ import sys
 import os
 import time
 import numpy as np
-import streamlit as plt
 import streamlit as st
 
-sys.path.insert(0, '/content/drive/MyDrive/rl-gridworld')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from environment.gridworld import GridWorld
 from agents.jerry_agent    import JerryAgent
 from agents.tom_agent      import TomAgent
 
-st.set_page_config(page_title="Tom & Jerry: RL Showcase 2027", layout="wide")
+st.set_page_config(page_title="Tom & Jerry RL", layout="wide")
 
 st.title("Tom & Jerry: Multi-Agent Reinforcement Learning")
 
@@ -43,8 +45,8 @@ def load_trained_agents(ep):
     jerry.epsilon = 0.05
     tom.epsilon = 0.05
     
-    jerry_file = f'/content/drive/MyDrive/rl-gridworld/models/checkpoints/jerry_ep_{ep}.npy'
-    tom_file   = f'/content/drive/MyDrive/rl-gridworld/models/checkpoints/tom_ep_{ep}.npy'
+    jerry_file = os.path.join(project_root, 'models', 'checkpoints', f'jerry_ep_{ep}.npy')
+    tom_file   = os.path.join(project_root, 'models', 'checkpoints', f'tom_ep_{ep}.npy')
     
     if os.path.exists(jerry_file) and os.path.exists(tom_file):
         j_data = np.load(jerry_file, allow_pickle=True).item()
@@ -121,7 +123,6 @@ with col1:
 
             grid_placeholder.markdown(grid_html, unsafe_allow_html=True)
 
-            # status (clean + non-AI style)
             status_placeholder.info(
                 f"Step: {step} | Cheese HP: {env.cheese_hp}/5"
             )
@@ -150,7 +151,7 @@ with col1:
 with col2:
     st.subheader("Training Results")
 
-    graph_path = "/content/drive/MyDrive/rl-gridworld/assets/graphs/win_rate_progression.png"
+    graph_path = os.path.join(project_root, 'assets', 'graphs', 'win_rate_progression.png')
 
     if os.path.exists(graph_path):
         st.image(
