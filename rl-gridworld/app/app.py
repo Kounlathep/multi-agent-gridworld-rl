@@ -147,20 +147,23 @@ if start_button:
         if done:
             break
 
-final_grid = render_grid_to_emoji(env)
+    final_grid = render_grid_to_emoji(env)
 
-grid_placeholder.markdown(generate_grid_html(final_grid), unsafe_allow_html=True)
+    grid_placeholder.markdown(
+        generate_grid_html(final_grid),
+        unsafe_allow_html=True
+    )
 
-if env.winner == "jerry":
-    st.balloons()
-    status_placeholder.success(
-        f"Jerry wins the game in {env.steps} steps!"
-    )
-elif env.winner == "tom":
-    status_placeholder.error(
-        f"Tom wins the game in {env.steps} steps!"
-    )
-else:
-    status_placeholder.warning(
-        f"Match Draw after {env.steps} steps!"
-    )
+    if env.winner == "jerry":
+        st.balloons()
+        status_placeholder.success(
+            f"Jerry wins the game in    {env.steps} steps!"
+        )
+    elif env.winner == "tom":
+        status_placeholder.error(
+            f"Tom wins the game in     {env.steps} steps!"
+        )
+    else:
+        status_placeholder.warning(
+            f"Match Draw after     {env.steps} steps!"
+        )
