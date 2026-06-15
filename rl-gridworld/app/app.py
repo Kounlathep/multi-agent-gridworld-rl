@@ -91,23 +91,15 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 col_btn, col_chk, col_spd = st.columns([1, 1, 1])
 
+EPISODES = [100, 1000, 10000, 30000, 50000]
+
 with col_chk:
     ai_skill = st.selectbox(
         "Checkpoint:",
-        options=[
-            "Episode 100",
-            "Episode 1000",
-            "Episode 10000",
-            "Episode 30000",
-            "Episode 50000"
-        ],
+        options=[f"Episode {ep}" for ep in EPISODES],
         index=4
     )
-    if "100" in ai_skill and "1000" not in ai_skill: ep_selected = 100
-    elif "1000" in ai_skill and "10000" not in ai_skill: ep_selected = 1000
-    elif "10000" in ai_skill: ep_selected = 10000
-    elif "30000" in ai_skill: ep_selected = 30000
-    else: ep_selected = 50000
+    ep_selected = int(ai_skill.split()[1])
 
 with col_spd:
     speed_option = st.selectbox(
