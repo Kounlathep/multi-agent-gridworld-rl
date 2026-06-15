@@ -157,13 +157,13 @@ if start_button:
     if env.winner == "jerry":
         st.balloons()
         status_placeholder.success(
-            f"Jerry wins the game in    {env.steps} steps!"
+            f"Jerry wins the game in {env.steps} steps!"
         )
     elif env.winner == "tom":
         status_placeholder.error(
-            f"Tom wins the game in     {env.steps} steps!"
+            f"Tom wins the game in {env.steps} steps!"
         )
     else:
         status_placeholder.warning(
-            f"Match Draw after     {env.steps} steps!"
+            f"Match Draw after {env.steps} steps!"
         )
