@@ -53,21 +53,31 @@ def render_grid_to_emoji(env):
 def generate_grid_html(grid_matrix):
     html = """
     <div style="
-        font-size: 32px;
-        line-height: 1.4;
-        letter-spacing: 6px;
-        text-align: center;
-        background-color: #1e1e1e;
-        padding: 20px;
-        border-radius: 10px;
-        max-width: 280px;
-        margin: 0 auto;
-        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+        width: 100%;
     ">
+        <div style="
+            font-size: 32px;
+            line-height: 1.6;
+            letter-spacing: 4px;
+            text-align: center;
+            background-color: #1e1e1e;
+            padding: 20px 28px;
+            border-radius: 10px;
+            display: inline-block;
+        ">
     """
     for row in grid_matrix:
-        html += " ".join(row) + "<br>"
-    html += "</div>"
+        html += (
+            "<div style='white-space: nowrap;'>"
+            + " ".join(row)
+            + "</div>"
+        )
+    html += """
+        </div>
+    </div>
+    """
     return html
 
 
